@@ -20,7 +20,6 @@ let day= days[date.getDay()];
 return `${day} ${hours}:${minutes} `
 }
 function displayTemperature(response){
-console.log(response.data);
 let temperatureElement=document.querySelector("#temperature");
 let cityElement=document.querySelector("#city");
 temperatureElement.innerHTML= Math.round(response.data.temperature.current);
