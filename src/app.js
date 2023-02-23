@@ -20,6 +20,7 @@ let day= days[date.getDay()];
 return `${day} ${hours}:${minutes} `
 }
 function displayTemperature(response){
+ 
 let temperatureElement=document.querySelector("#temperature");
 let cityElement=document.querySelector("#city");
 temperatureElement.innerHTML= Math.round(response.data.temperature.current);
@@ -32,9 +33,12 @@ let windElement=document.querySelector("#wind");
 windElement.innerHTML= Math.round(response.data.wind.speed);
 let dataElement=document.querySelector("#date");
 dataElement.innerHTML=formatData(response.data.time*1000);
+let iconElement=document.querySelector("#icon");
+iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`)
+iconElement.setAttribute("alt", response.data.condition.description);
 }
 let apiKey= "27eca4fao6df830t6cbc3314b08c2e4a";
-let city="paris"
+let city="New york";
 let apiUrl=`https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayTemperature);
