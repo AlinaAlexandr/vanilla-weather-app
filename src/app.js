@@ -23,17 +23,20 @@ function displayTemperature(response){
  
 let temperatureElement=document.querySelector("#temperature");
 let cityElement=document.querySelector("#city");
-temperatureElement.innerHTML= Math.round(response.data.temperature.current);
-cityElement.innerHTML= (response.data.city);
 let descriptionElement=document.querySelector("#description");
-descriptionElement.innerHTML= (response.data.condition.description);
 let humidityElement=document.querySelector("#humidity");
-humidityElement.innerHTML= (response.data.temperature.humidity);
 let windElement=document.querySelector("#wind");
-windElement.innerHTML= Math.round(response.data.wind.speed);
 let dataElement=document.querySelector("#date");
-dataElement.innerHTML=formatData(response.data.time*1000);
 let iconElement=document.querySelector("#icon");
+
+celcsiusTemperature = response.data.temperature.current;
+
+temperatureElement.innerHTML= Math.round(celcsiusTemperature);
+cityElement.innerHTML= (response.data.city);
+descriptionElement.innerHTML= (response.data.condition.description);
+humidityElement.innerHTML= (response.data.temperature.humidity);
+windElement.innerHTML= Math.round(response.data.wind.speed);
+dataElement.innerHTML=formatData(response.data.time*1000);
 iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`)
 iconElement.setAttribute("alt", response.data.condition.description);
 }
@@ -49,9 +52,32 @@ function handleSubmit(event) {
     let cityInputElement = document.querySelector("#city-input").value;
     search(cityInputElement);
   }
+function displayFahrenheitTemperature (event){
+    event.preventDefault();
+    let temperatureElement=document.querySelector("#temperature");
+    celsiusLinnk.classList.remove("active");
+    fahrenheitLinnk.classList.add("active");
+    let fahrenheitTemperature= (celcsiusTemperature*9)/5+32;
+    temperatureElement.innerHTML=Math.round(fahrenheitTemperature);
 
+}
+function displayCelsiusTemperature(event){
+    event.preventDefault();
+    celsiusLinnk.classList.add("active");
+    fahrenheitLinnk.classList.remove("active");
+    let temperatureElement=document.querySelector("#temperature");
+    temperatureElement.innerHTML=Math.round(celcsiusTemperature);
+}
+let celcsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
+
+
+let fahrenheitLinnk=document.querySelector("#fahrenheit-link");
+fahrenheitLinnk.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLinnk=document.querySelector("#celsius-link");
+celsiusLinnk.addEventListener("click", displayCelsiusTemperature);
 
 search("Oslo");
