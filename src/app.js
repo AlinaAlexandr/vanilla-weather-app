@@ -114,32 +114,13 @@ function handleSubmit(event) {
     let cityInputElement = document.querySelector("#city-input").value;
     search(cityInputElement);
   }
-function displayFahrenheitTemperature (event){
-    event.preventDefault();
-    let temperatureElement=document.querySelector("#temperature");
-    celsiusLinnk.classList.remove("active");
-    fahrenheitLinnk.classList.add("active");
-    let fahrenheitTemperature= (celcsiusTemperature*9)/5+32;
-    temperatureElement.innerHTML=Math.round(fahrenheitTemperature);
 
-}
-function displayCelsiusTemperature(event){
-    event.preventDefault();
-    celsiusLinnk.classList.add("active");
-    fahrenheitLinnk.classList.remove("active");
-    let temperatureElement=document.querySelector("#temperature");
-    temperatureElement.innerHTML=Math.round(celcsiusTemperature);
-}
-let celcsiusTemperature = null;
+
+
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 
-let fahrenheitLinnk=document.querySelector("#fahrenheit-link");
-fahrenheitLinnk.addEventListener("click", displayFahrenheitTemperature);
-
-let celsiusLinnk=document.querySelector("#celsius-link");
-celsiusLinnk.addEventListener("click", displayCelsiusTemperature);
 
 search("Oslo");
